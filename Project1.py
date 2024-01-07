@@ -38,28 +38,33 @@ garpike and stingray are also present.'''
 names = ["bob", "ann", "mike", "liz"]
 passwords = ["123", "pass123", "password123", "pass123"]
 line = 40*"-"
-numbers = ["1", "2", "3"]
+num_in_list = len(TEXTS)
 
 #condition for login
 name = input("username:")
 if name in names:
+    index = names.index(name)
     password = input("password:")
     if password in passwords:
-        print(line)
+        if password == passwords[index]:
+            print(line)
+        else:
+            print("Wrong password")
+            sys.exit()           
     else:
         print("unregistered user, terminating the program..")
         sys.exit()
-else: 
+else:
     print("unregistered user, terminating the program..")
     sys.exit()
 
 print("Welcome to app,", name)
-print("We have 3 texts to be analyzed.")
+print("We have", num_in_list, "texts to be analyzed.")
 print(line)
 
 #text selection condition
-number = input("Enter a number between 1 and 3: ")
-if number in numbers:
+number = input(f"Enter a number between 1 and {num_in_list}: ")
+if int(number) <= num_in_list:
     print(line)
 else:
     print("Number is out of scope")
@@ -86,8 +91,7 @@ print("There are", num_lowercase_letters, "lowercase words.")
 print("There are", num_numbers, "numeric strings.")
 print("The sum of all the numbers", sum_of_numbers)
 print(line)
-print("LEN|  OCCURENCES  |NR.")
-print(line)
+
 
 #graphs
 word_length_dict = {}
@@ -98,11 +102,15 @@ for word in words:
     else:
         word_length_dict[length] = 1
 sorted_final_dict = dict(sorted(word_length_dict.items()))
+#variables for final print
+max_value = max(sorted_final_dict.values())
 x = 0
+print(f"LEN| {'OCCURENCES':<{max_value}} |NR.")
+print(line)
+#print of graphs
 for _ in sorted_final_dict:
     num = list(sorted_final_dict.keys())[x]
     values = list(sorted_final_dict.values())[x]
-    #print(" ",num,"|","*"*values,"|", values)
-    print(f"{num:2} | {'*' * values:<13}|{values}")
+    print(f"{num:2} | {'*' * values:<{max_value}} |{values}")
     x = x + 1
 
