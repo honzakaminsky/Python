@@ -66,7 +66,11 @@ else:
     sys.exit()
 
 #variables for final output
-words = TEXTS[int(number)-1].split()
+words = []
+for word in TEXTS[int(number)-1].split():
+    clear_word = word.strip(",.:;'")
+    words.append(clear_word)
+    
 num_of_words = (len(words))
 num_capital_start = sum(1 for word in words if word[0].isupper())
 num_capital_letters = sum(1 for word in words if word.isupper())
@@ -101,3 +105,4 @@ for _ in sorted_final_dict:
     #print(" ",num,"|","*"*values,"|", values)
     print(f"{num:2} | {'*' * values:<13}|{values}")
     x = x + 1
+
